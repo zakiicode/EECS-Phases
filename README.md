@@ -15,19 +15,17 @@ The EECS term project that we will be attempting to complete over the remainder 
 
 Software Requirements:
 
-1. Users can navigate to different game modes using menu
+1. Allows navigation to different game modes using menu
 2. The game allows players to input their player name
 3. Program will decide winner based on certain conditions
 4. Program will display score as the game is played
-5. Program will reset to main menu after the game is ended
-6. Users can select rock paper or scissors by clicking.
-7. Purpose: Program will allow the user to play a rock paper scissors game
-8. The program should load and be usable within 5 seconds
-9. The program will be able to run on computers as long as they have basic hardware
-10. Program should be limited to 2 wins, then it should restart
-11. The computer enemy will choose different options each time, not conforming to a certain moveset ( moves will be random)
-12. The application should be able to handle games that are between pvp and pvc.
-13. The application will be developed in HTML, Javascript, and CSS to enable the creation of a web based game
-14. Program will allow keyboard and mouse input
-15. The interface should be easy to use with minimal guidance and allow users to play the game without errors
+5. Program will ask if you would like to play the mode again, if not it will return to the main menu 
+6. Background music will be played during the game to give a game aesthetic
+7. Display three pictures to be selected
+8. Prompt to ask if selection is final
+9. Program should be limited to 2 wins, then it should restart
+10. The computer enemy will choose different options each time, not conforming to a certain moveset ( moves will be random)
+11. The application should be able to handle games that are between pvp and pvc.
+12. If chosen program will display a helpful tutorial video
+
 
