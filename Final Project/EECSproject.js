@@ -32,7 +32,10 @@ function mainScreen(){
     var newImg = document.createElement("img");
     $(newImg).attr("id", "cont");
     $(newImg).attr("src", "images/continue.jpg");
-    $(newImg).click(createMenu);
+    $(newImg).click( function(){ 
+        createMenu();
+        $(".music").css("visibility", "hidden");
+    })
     $("#title").append(newImg);
     
 
