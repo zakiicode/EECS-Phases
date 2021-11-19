@@ -2,8 +2,6 @@ Name of Team: Data Pirates
 
 Members: 
 
-Kehinde Makinwa (imkenny@my.yorku.ca)  Section A Lab 03   
-
 Zaki Siddiqui (zakisidd@my.yorku.ca) Section A Lab 03 
 
 Mohamed Abdi (abdi238@my.yorku.ca) Section A  Lab 02
