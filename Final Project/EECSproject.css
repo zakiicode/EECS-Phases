@@ -1,0 +1,74 @@
+body {
+  font-family: Helvetica,Arial,sans-serif;
+  line-height: 20px;
+  margin: 0px 0px 0px 20px;
+  font-size: 14px;
+  background-color: #94cff3;
+  background-image: url("images/deck.jpg");
+}
+#Title{
+  /*position: relative;*/
+  margin-left: 170px;
+  margin-right: 300px;
+  visibility: visible;
+  display:flex;
+  justify-content:center;
+}
+#char,#choose{
+  margin-left: 200px;
+  margin-right: 300px;
+  visibility: visible;
+  display:flex;
+  justify-content:center;
+}
+#cont{
+  /*position: relative;*/
+  width: 25%;
+  height:auto;
+  margin-left: 475px;
+  margin-right: 30px;
+  margin-top: 80px;
+  visibility: visible;
+  display:flex;
+  justify-content:center;
+}
+#option1,#option2,#option3,#option4{
+  /*position: relative;*/
+  width: 20%;
+  height:auto;
+  margin-left: 475px;
+  margin-right: 30px;
+  margin-top: 40px;
+  visibility: visible;
+  display:flex;
+  justify-content:center;
+}
+#luffy,#sanji{
+  width: 20%;
+  height:auto;
+  margin-left: 360px;
+  margin-right: 30px;
+  visibility: visible;
+  border-style: solid;
+  border-color: maroon;
+  background-color:maroon;
+}
+
+#zoro,#law{
+  width: 20%;
+  height:auto;
+  visibility: visible;
+  border-style: solid;
+  border-color: maroon;
+  background-color:maroon;
+ 
+}
+#luff,#zor,#sanj,#la{
+  width:30%;
+  margin-left: 400px;
+}
+#rock,#paper,#sciss{
+  width:20%;
+  margin-left: 120px;
+  margin-top: 120px;
+}
