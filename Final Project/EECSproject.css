@@ -1,0 +1,100 @@
+body {
+  font-family: Helvetica,Arial,sans-serif;
+  line-height: 20px;
+  margin: 0px 0px 0px 20px;
+  font-size: 14px;
+  background-color: #94cff3;
+  background-image: url("images/deck.jpg");
+}
+#Title{
+  position: relative;
+  left:20%;
+  visibility: visible;
+  display:flex;
+  justify-content:center;
+}
+#char,#choose,#pcw,#p1w,#tie{
+  position: relative;
+  left:25%;
+  visibility: visible;
+  display:flex;
+  justify-content:center;
+}
+#cont{
+  position: relative;
+  width: 25%;
+  height:auto;
+  left:38%;
+  margin-top: 80px;
+  visibility: visible;
+  display:flex;
+  justify-content:center;
+}
+#option1,#option2,#option3,#option4{
+  position: relative;
+  width: 20%;
+  height:auto;
+  left:40%;
+  margin-top: 40px;
+  visibility: visible;
+  display:flex;
+  justify-content:center;
+}
+#luffy,#sanji,#zoro,#law{
+  position: relative;
+  width: 20%;
+  height:auto;
+  left:10%;
+  visibility: visible;
+  border-style: solid;
+  border-color: maroon;
+  background-color:maroon;
+}
+#luff,#zor,#sanj,#la{
+  position: relative;
+  width:30%;
+  left:36%;
+}
+#doffy,#chop{
+  position: relative;
+  width:60%;
+  left:36%;
+}
+#pcwin,#p1win{
+  position: relative;
+  left:20%;
+}
+#op{
+  position: relative;
+  width:90%;
+  left:5%;
+  
+}
+#rock,#paper,#sciss{
+  position: relative;
+  width:25%;
+  left:10%;
+  border-color: maroon;
+  background-color:maroon;
+}
+#score{
+  position: relative;
+  width:25%;
+  margin-top: 5%;
+  color:#94cff3;
+  font-size: 450%;
+  border-color: maroon;
+  background-color:maroon;
+  height: 450%;
+}
+#score2{
+  position: relative;
+  width:25%;
+  left:70%;
+  color:maroon;
+  font-size: 450%;
+  border-color: #94cff3;
+  background-color:#94cff3;
+  height: 450%;
+
+}
