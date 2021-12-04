@@ -14,11 +14,13 @@ window.onload = function(){
 }
 function tutorial(){
     $("#menu").html("");
-    $('#menu').html('<video controls autoplay> <source src="images/tutorial.mp4"  type="video/mp4"> </video>');
+    $(".music").css("visibility", "visible");
+    $('#menu').html('<video controls> <source src="images/tutorial.mp4"  type="video/mp4"> </video>');
     var no = document.createElement("img");
     $(no).attr("id", "no");
     $(no).attr("src", "images/menu.png");
     $(no).click( function() {
+        $(".music").css("visibility", "hidden");
         $("#menu").html("");
         mainScreen();
         
@@ -28,7 +30,7 @@ function tutorial(){
 }
 
 function mainScreen(){
-
+    $(".music").css("visibility", "visible");
     var newImg = document.createElement("img");
     $(newImg).attr("id", "Title");
     $(newImg).attr("src", "images/Title.png");
