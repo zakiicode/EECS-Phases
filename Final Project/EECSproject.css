@@ -30,7 +30,7 @@ body {
   display:flex;
   justify-content:center;
 }
-#option1,#option2,#option3,#option4{
+#option1,#option2,#option3,#option4,#hard,#norm{
   position: relative;
   width: 20%;
   height:auto;
@@ -97,4 +97,9 @@ body {
   background-color:#94cff3;
   height: 450%;
 
+}
+video{
+  position: relative;
+  width:50%;
+  left:25%;
 }
