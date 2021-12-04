@@ -14,7 +14,7 @@ app.post('/post', (req, res) => {
         var win = false;
         var pc = Math.floor(Math.random()*3+1);
         var diff = z['diff'];
-        if(diff == 1){
+        if(diff == 1 || diff == 4){
         // 1 is rock, 2 is paper, 3 is scissors
         if ((p1 == 1 && pc == 2)||(p1 == 2 && pc == 3)||(p1 == 3 && pc == 1)){
             win = false;
