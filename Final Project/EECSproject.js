@@ -547,7 +547,7 @@ function training(){
     name = "P1";
     name2 = "BOT";
 alert("Welcome to training! Hone your skills for later when you take on Dofalamingo or a friend!")
-    rps(1,true,1);
+    rps(1,true,4);
     console.log("training");
 
 }
@@ -597,7 +597,9 @@ function response(data){
         else if(p1win == false){
             var doffy = document.createElement("img");
             $(doffy).attr("id", "doffy");
-            $(doffy).attr("src", "images/doffy.png");
+            if (diff !=4){
+                $(doffy).attr("src", "images/doffy.png");
+            }
             var pcw = document.createElement("img");
             $(pcw).attr("id", "pcw");
             $(pcw).attr("src", "images/opwin.png");
