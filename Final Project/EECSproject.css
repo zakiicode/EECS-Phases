@@ -13,14 +13,14 @@ body {
   display:flex;
   justify-content:center;
 }
-#char,#choose,#pcw,#p1w,#tie{
+#char,#choose,#pcw,#p1w,#tie,#replay{
   position: relative;
   left:25%;
   visibility: visible;
   display:flex;
   justify-content:center;
 }
-#cont{
+#cont,#yes,#no{
   position: relative;
   width: 25%;
   height:auto;
