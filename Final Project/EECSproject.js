@@ -4,7 +4,6 @@ var name;
 var name2;
 var P1CHOICE =0;
 var P2CHOICE =0;
-//var url = "http://indigo.eecs.yorku.ca:3000/post";
 var url = "http://localhost:3000/post";
 
 
@@ -13,7 +12,20 @@ window.onload = function(){
     mainScreen(); 
       
 }
-
+function tutorial(){
+    $("#menu").html("");
+    $('#menu').html('<video controls autoplay> <source src="images/tutorial.mp4"  type="video/mp4"> </video>');
+    var no = document.createElement("img");
+    $(no).attr("id", "no");
+    $(no).attr("src", "images/menu.png");
+    $(no).click( function() {
+        $("#menu").html("");
+        mainScreen();
+        
+        }); 
+    $("#menu").append(no);
+    console.log("tutorial");
+}
 
 function mainScreen(){
 
@@ -77,14 +89,30 @@ function createMenu(){
     
     
 }
-
+function easyorhard(){
+    $("#menu").html("");
+    var norm = document.createElement("img");
+    $(norm).attr("id", "norm");
+    $(norm).attr("src", "images/normal.png");
+    $(norm).click( function() {
+        character_select(1,true,1);
+    }); 
+    $("#menu").append(norm);
+    var hard = document.createElement("img");
+    $(hard).attr("id", "hard");
+    $(hard).attr("src", "images/impossible.png");
+    $(hard).click( function() {
+        character_select(1,true,2);
+    }); 
+    $("#menu").append(hard);
+}
 function game_mode(op){
 
     if(op == 1){
-        character_select(1,true);
+        easyorhard();
     }
     else if (op == 2){
-        character_select(2,false);
+        character_select(2,false,3);
     }
     else if (op == 3){
         training();
@@ -93,7 +121,7 @@ function game_mode(op){
         tutorial();
     }
 }
-function character_select(n,sing){
+function character_select(n,sing,diff){
     $("#menu").html("");
 
     if(sing == true){
@@ -121,15 +149,16 @@ function character_select(n,sing){
 
             if(n==1 && sing == true){
                 name = "LUFFY";
-                rps(1,true);
+                name2 ="DOFLAMINGO";
+                rps(1,true,diff);
             }
             if(n==1 && sing ==false){
                 name2 = "LUFFY";
-                rps(2,false);
+                rps(2,false,diff);
             }
             if(n==2){
                 name = "LUFFY";
-                character_select(n-1,false);
+                character_select(n-1,false,diff);
                 }
             
         }, 2000 );
@@ -152,15 +181,16 @@ function character_select(n,sing){
 
             if(n==1 && sing == true){
                 name = "ZORO";
-                rps(1,true);
+                name2 ="DOFLAMINGO";
+                rps(1,true,diff);
             }
             if(n==1 && sing ==false){
                 name2 = "ZORO";
-                rps(2,false);
+                rps(2,false,diff);
             }
             if(n==2){
                 name = "ZORO";
-                character_select(n-1,false);}
+                character_select(n-1,false,diff);}
         }, 2000 );
     }); 
     $("#menu").append(zoro);
@@ -182,15 +212,16 @@ function character_select(n,sing){
 
             if(n==1 && sing == true){
                 name = "SANJI";
-                rps(1,true);
+                name2 ="DOFLAMINGO";
+                rps(1,true,diff);
             }
             if(n==1 && sing ==false){
                 name2 = "SANJI";
-                rps(2,false);
+                rps(2,false,diff);
             }
             if(n==2){
                 name = "SANJI";
-                character_select(n-1,false);}
+                character_select(n-1,false,diff);}
         }, 2000 );
     }); 
     $("#menu").append(sanji);
@@ -211,28 +242,29 @@ function character_select(n,sing){
 
             if(n==1 && sing == true){
                 name = "LAW";
-                rps(1,true);
+                name2 ="DOFLAMINGO";
+                rps(1,true,diff);
             }
             if(n==1 && sing ==false){
                 name2 = "LAW";
-                rps(2,false);
+                rps(2,false,diff);
             }
             if(n==2){
                 name = "LAW";
-                character_select(n-1,false);
+                character_select(n-1,false,diff);
                 
             }
         }, 2000 );
     }); 
     $("#menu").append(law);
 }
-function rps(n,sing){
+function rps(n,sing,diff){
     $("#menu").html("");
     $("#score").html("");
     $("#score2").html("");
     game_score();
     if(P1SCORE>=3 || PCSCORE >=3){
-        game_result(P1SCORE,PCSCORE,sing);
+        game_result(P1SCORE,PCSCORE,sing,diff);
     }
     else{
     
@@ -240,7 +272,12 @@ function rps(n,sing){
         P1CHOICE=0;
         P2CHOICE=0;
     }
-   
+   if(sing == false && n==2){
+       alert(name+"'S TURN! "+name2+" NO PEEKING!")
+   }
+   else if(sing == false && n==1){
+    alert(name2+"'S TURN! "+name+" NO PEEKING!")
+}
     var choose = document.createElement("img");
     $(choose).attr("id", "choose");
     $(choose).attr("src", "images/choose.jpg");
@@ -252,17 +289,18 @@ function rps(n,sing){
         if(sing==true){
             var dec= confirm("Are You Sure "+name+"?");
             if(dec == true){
-                
+                console.log(diff);
                  P1CHOICE = 1;
-                 //result(P1CHOICE,0);
-                 $.post(
-                    url+'?data='+JSON.stringify({
-                    'name':name, 
-                    'choice':P1CHOICE,
-                    'action':'evaluatesing', 
-                    }),
-                    response
-                );
+                    $.post(
+                        url+'?data='+JSON.stringify({
+                        'name':name, 
+                        'choice':P1CHOICE,
+                        'diff':diff,
+                        'action':'evaluatesing', 
+                        }),
+                        response
+                    );
+                 
                 
             }
         }
@@ -305,12 +343,13 @@ function rps(n,sing){
         if(sing==true){
             var dec= confirm("Are You Sure "+name+"?");
             if(dec == true){
-                
+                console.log(diff);
                  P1CHOICE = 2;
                  //result(P1CHOICE,0);
                  $.post(url+'?data='+JSON.stringify({
                      'name':name,
                      'choice':P1CHOICE,
+                     'diff':diff,
                      'action':'evaluatesing'
                  }),
                  response);
@@ -355,11 +394,13 @@ function rps(n,sing){
             if(dec == true){
                 
                  P1CHOICE = 3;
+                 console.log(diff);
                 // result(P1CHOICE,0);
                 $.post(
                     url+'?data='+JSON.stringify({
                     'name':name, 
                     'choice':P1CHOICE,
+                    'diff':diff,
                     'action':'evaluatesing', 
                     }),
                     response
@@ -401,7 +442,7 @@ function rps(n,sing){
 }
 
 
-function game_result(score1,score2,sing){
+function game_result(score1,score2,sing,diff){
     if(score1 >= 3){
         var p1win = document.createElement("img");
         $(p1win).attr("id", "p1win");
@@ -425,13 +466,18 @@ function game_result(score1,score2,sing){
             P1SCORE =0;
             $("#score").html("");
             $("#score2").html("");
-            play_again(sing);
+            play_again(sing,diff);
         }, 5000 );
     }
     else if(score2 >= 3){
         var pcwin = document.createElement("img");
         $(pcwin).attr("id", "pcwin");
-        $(pcwin).attr("src", "images/opdub.png");
+        if(sing==true){
+            $(pcwin).attr("src", "images/opdub.png");
+        }
+        else if(sing==false){
+            $(pcwin).attr("src", "images/p2dub.png");
+        }
         var op = document.createElement("img");
         $(op).attr("id", "op");
         $(op).attr("src", "images/onepiece.png");
@@ -452,11 +498,11 @@ function game_result(score1,score2,sing){
             $("#score").html("");
             $("#score2").html("");
 
-            play_again(sing);
+            play_again(sing,diff);
         }, 5000 );
     }
 }
-function play_again(sing){
+function play_again(sing,diff){
     var replay = document.createElement("img");
     $(replay).attr("id", "replay");
     $(replay).attr("src", "images/again.png");
@@ -467,11 +513,11 @@ function play_again(sing){
     $(yes).click( function() {
         if(sing == true){
 
-            rps(1,true);
+            rps(1,true,diff);
         }
         else if(sing == false){
 
-            rps(2,false);
+            rps(2,false,diff);
         }
         
         }); 
@@ -500,21 +546,19 @@ function training(){
     $("#menu").html("");
     name = "P1";
     name2 = "BOT";
-    rps(1,true);
+alert("Welcome to training! Hone your skills for later when you take on Dofalamingo or a friend!")
+    rps(1,true,1);
     console.log("training");
 
 }
-function tutorial(){
-    $("#menu").html("");
 
-    console.log("tutorial");
-}
 
 function response(data){
     var response = JSON.parse(data);
     console.log(data);
    if (response['action'] == 'evaluatesing'){
         var p1win = response['p1win'];
+        var diff = response['diff'];
         if (p1win == true){
             var chop = document.createElement("img");
             $(chop).attr("id", "chop");
@@ -547,7 +591,7 @@ function response(data){
                 $("#score2").html("");
                 
 
-                rps(1,true);
+                rps(1,true,diff);
             }, 2000 ); 
         }
         else if(p1win == false){
@@ -569,7 +613,7 @@ function response(data){
                 $("#score2").html("");
                 
 
-                rps(1,true);
+                rps(1,true,diff);
             }, 2000 );
         }
         else if (p1win=="tie"){
@@ -592,7 +636,7 @@ function response(data){
                 $(tie).hide();
                 $("#score").html("");
                 $("#score2").html("");
-                rps(1,true);
+                rps(1,true,diff);
                
 
             }, 2000 );
@@ -653,7 +697,7 @@ function response(data){
         }
         var pcw = document.createElement("img");
         $(pcw).attr("id", "pcw");
-        $(pcw).attr("src", "images/opwin.png");
+        $(pcw).attr("src", "images/p2win.png");
         $("#menu").html("");
         $("#menu").append(pcw);
         $("#menu").append(doffy);
@@ -693,196 +737,3 @@ function response(data){
         }
     }
 }
-/*
-function result(p1,p2){
-    var pc = Math.floor(Math.random()*3+1);
-    //console.log(pc);
-    if(p2==0){
-        if(PCSCORE >= 3 || P1SCORE >=3){
-            game_result(P1SCORE,PCSCORE);
-            console.log("win");
-        }
-        // 1 is rock, 2 is paper, 3 is scissors
-        else if ((p1 == 1 && pc == 2)||(p1 == 2 && pc == 3)||(p1 == 3 && pc == 1)&&PCSCORE<3){
-            var doffy = document.createElement("img");
-            $(doffy).attr("id", "doffy");
-            $(doffy).attr("src", "images/doffy.png");
-            var pcw = document.createElement("img");
-            $(pcw).attr("id", "pcw");
-            $(pcw).attr("src", "images/opwin.png");
-            $("#menu").html("");
-            $("#menu").append(pcw);
-            $("#menu").append(doffy);
-
-            setTimeout(function() {             
-                $(doffy).hide();
-                $(pcw).hide();
-                PCSCORE++;
-                $("#score").html("");
-                $("#score2").html("");
-                //console.log(PCSCORE);
-                rps(1,true);
-            }, 2000 );
-            }
-        else if((pc == 1 && p1 == 2)||(pc == 2 && p1 == 3)||(pc == 3 && p1 == 1)&&P1SCORE<3){
-            var chop = document.createElement("img");
-            $(chop).attr("id", "chop");
-            if(name == "LUFFY"){
-                $(chop).attr("src", "images/lufbod.png");
-            }
-            else if(name == "ZORO"){
-                $(chop).attr("src", "images/zorbod.png");
-            }
-            else if(name == "SANJI"){
-                $(chop).attr("src", "images/sanbod.png");
-            }
-            else if(name == "LAW"){
-                $(chop).attr("src", "images/lawbod.png");
-            }
-            var p1w = document.createElement("img");
-            $(p1w).attr("id", "p1w");
-            $(p1w).attr("src", "images/p1win.png");
-            $("#menu").html("");
-            $("#menu").append(p1w);
-            $("#menu").append(chop);
-            
-            
-            setTimeout(function() { 
-                
-                $(chop).hide();
-                $(p1w).hide();
-                P1SCORE++;
-                $("#score").html("");
-                $("#score2").html("");
-                //console.log(P1SCORE);
-                rps(1,true);
-            }, 2000 );
-        }
-        else if((pc ==p1) &&P1SCORE<3&&PCSCORE<3){
-        // console.log("tie");
-            var chop = document.createElement("img");
-            $(chop).attr("id", "chop");
-            $(chop).attr("src", "images/chopper.png");
-            var tie = document.createElement("img");
-            $(tie).attr("id", "tie");
-            $(tie).attr("src", "images/tie.jpg");
-            $("#menu").html("");
-            $("#menu").append(tie);
-            $("#menu").append(chop);
-            
-
-            
-            
-            setTimeout(function() { 
-                
-                $(chop).hide();
-                $(tie).hide();
-                $("#score").html("");
-                $("#score2").html("");
-                rps(1,true);
-            }, 2000 );
-        }
- }
- else{
-  
-    if(PCSCORE >= 3 || P1SCORE >=3){
-        game_result(P1SCORE,PCSCORE);
-        console.log("win");
-    }
-    // 1 is rock, 2 is paper, 3 is scissors
-    else if ((p1 == 1 && p2 == 2)||(p1 == 2 && p2 == 3)||(p1 == 3 && p2 == 1) && PCSCORE<3){
-        
-        var doffy = document.createElement("img");
-        $(doffy).attr("id", "doffy");
-        if(name2 == "LUFFY"){
-            $(doffy).attr("src", "images/lufbod.png");
-        }
-        else if(name2 == "ZORO"){
-            $(doffy).attr("src", "images/zorbod.png");
-        }
-        else if(name2 == "SANJI"){
-            $(doffy).attr("src", "images/sanbod.png");
-        }
-        else if(name2 == "LAW"){
-            $(doffy).attr("src", "images/lawbod.png");
-        }
-        var pcw = document.createElement("img");
-        $(pcw).attr("id", "pcw");
-        $(pcw).attr("src", "images/opwin.png");
-        $("#menu").html("");
-        $("#menu").append(pcw);
-        $("#menu").append(doffy);
-
-        setTimeout(function() {             
-            $(doffy).hide();
-            $(pcw).hide();
-            PCSCORE++;
-            $("#score").html("");
-            $("#score2").html("");
-            //console.log(PCSCORE);
-            rps(2,false);
-        }, 2000 );
-         }
-    else if((p2 == 1 && p1 == 2)||(p2 == 2 && p1 == 3)||(p2 == 3 && p1 == 1)&&P1SCORE<3){
-        var chop = document.createElement("img");
-        $(chop).attr("id", "chop");
-        if(name == "LUFFY"){
-            $(chop).attr("src", "images/lufbod.png");
-        }
-        else if(name == "ZORO"){
-            $(chop).attr("src", "images/zorbod.png");
-        }
-        else if(name == "SANJI"){
-            $(chop).attr("src", "images/sanbod.png");
-        }
-        else if(name == "LAW"){
-            $(chop).attr("src", "images/lawbod.png");
-        }
-        var p1w = document.createElement("img");
-        $(p1w).attr("id", "p1w");
-        $(p1w).attr("src", "images/p1win.png");
-        $("#menu").html("");
-        $("#menu").append(p1w);
-        $("#menu").append(chop);
-        
-        
-        setTimeout(function() { 
-            
-            $(chop).hide();
-            $(p1w).hide();
-            P1SCORE++;
-            $("#score").html("");
-            $("#score2").html("");
-            //console.log(P1SCORE);
-            rps(2,false);
-        }, 2000 );
-    }
-    else if((p2 == p1) && P1SCORE<3&&PCSCORE<3){
-       // console.log("tie");
-        var chop = document.createElement("img");
-        $(chop).attr("id", "chop");
-        $(chop).attr("src", "images/chopper.png");
-        var tie = document.createElement("img");
-        $(tie).attr("id", "tie");
-        $(tie).attr("src", "images/tie.jpg");
-        $("#menu").html("");
-        $("#menu").append(tie);
-        $("#menu").append(chop);
-        
-
-        
-        
-        setTimeout(function() { 
-            
-            $(chop).hide();
-            $(tie).hide();
-            $("#score").html("");
-            $("#score2").html("");
-            rps(2,false);
-        }, 2000 );
-    }
-
- }
-   
-}
-*/
