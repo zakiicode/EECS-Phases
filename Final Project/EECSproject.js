@@ -232,17 +232,15 @@ function rps(n,sing){
     $("#score2").html("");
     game_score();
     if(P1SCORE>=3 || PCSCORE >=3){
-        game_result(P1SCORE,PCSCORE);
+        game_result(P1SCORE,PCSCORE,sing);
     }
     else{
-
     
     if(sing==true || n==2){
         P1CHOICE=0;
         P2CHOICE=0;
     }
-    //console.log("name:"+name);
-    //console.log("name2:"+name2);
+   
     var choose = document.createElement("img");
     $(choose).attr("id", "choose");
     $(choose).attr("src", "images/choose.jpg");
@@ -254,7 +252,7 @@ function rps(n,sing){
         if(sing==true){
             var dec= confirm("Are You Sure "+name+"?");
             if(dec == true){
-                if(sing==true){
+                
                  P1CHOICE = 1;
                  //result(P1CHOICE,0);
                  $.post(
@@ -265,7 +263,7 @@ function rps(n,sing){
                     }),
                     response
                 );
-                }
+                
             }
         }
         else if(sing==false){
@@ -307,7 +305,7 @@ function rps(n,sing){
         if(sing==true){
             var dec= confirm("Are You Sure "+name+"?");
             if(dec == true){
-                if(sing==true){
+                
                  P1CHOICE = 2;
                  //result(P1CHOICE,0);
                  $.post(url+'?data='+JSON.stringify({
@@ -316,7 +314,7 @@ function rps(n,sing){
                      'action':'evaluatesing'
                  }),
                  response);
-                }
+                
             }
         }
         else if(sing==false){
@@ -355,7 +353,7 @@ function rps(n,sing){
         if(sing==true){
             var dec= confirm("Are You Sure "+name+"?");
             if(dec == true){
-                if(sing==true){
+                
                  P1CHOICE = 3;
                 // result(P1CHOICE,0);
                 $.post(
@@ -366,7 +364,7 @@ function rps(n,sing){
                     }),
                     response
                 );
-                }
+                
             }
         }
         else if(sing==false){
@@ -403,7 +401,7 @@ function rps(n,sing){
 }
 
 
-function game_result(score1,score2){
+function game_result(score1,score2,sing){
     if(score1 >= 3){
         var p1win = document.createElement("img");
         $(p1win).attr("id", "p1win");
@@ -427,7 +425,7 @@ function game_result(score1,score2){
             P1SCORE =0;
             $("#score").html("");
             $("#score2").html("");
-            mainScreen();
+            play_again(sing);
         }, 5000 );
     }
     else if(score2 >= 3){
@@ -453,11 +451,42 @@ function game_result(score1,score2){
             P1SCORE =0;
             $("#score").html("");
             $("#score2").html("");
-            mainScreen();
+
+            play_again(sing);
         }, 5000 );
     }
 }
+function play_again(sing){
+    var replay = document.createElement("img");
+    $(replay).attr("id", "replay");
+    $(replay).attr("src", "images/again.png");
+    $("#menu").append(replay);
+    var yes = document.createElement("img");
+    $(yes).attr("id", "yes");
+    $(yes).attr("src", "images/yes.png");
+    $(yes).click( function() {
+        if(sing == true){
 
+            rps(1,true);
+        }
+        else if(sing == false){
+
+            rps(2,false);
+        }
+        
+        }); 
+    $("#menu").append(yes);
+    var no = document.createElement("img");
+    $(no).attr("id", "no");
+    $(no).attr("src", "images/menu.png");
+    $(no).click( function() {
+        $("#menu").html("");
+        mainScreen();
+        
+        }); 
+    $("#menu").append(no);
+
+}
 function game_score(){
     $("#score").append(name + ":"+P1SCORE);
     if(name2 != undefined){
@@ -479,7 +508,6 @@ function tutorial(){
     $("#menu").html("");
 
     console.log("tutorial");
-
 }
 
 function response(data){
@@ -517,7 +545,8 @@ function response(data){
                 P1SCORE++;
                 $("#score").html("");
                 $("#score2").html("");
-                //console.log(P1SCORE);
+                
+
                 rps(1,true);
             }, 2000 ); 
         }
@@ -538,7 +567,8 @@ function response(data){
                 PCSCORE++;
                 $("#score").html("");
                 $("#score2").html("");
-                //console.log(PCSCORE);
+                
+
                 rps(1,true);
             }, 2000 );
         }
@@ -563,6 +593,8 @@ function response(data){
                 $("#score").html("");
                 $("#score2").html("");
                 rps(1,true);
+               
+
             }, 2000 );
         }
         
@@ -600,8 +632,8 @@ function response(data){
                 P1SCORE++;
                 $("#score").html("");
                 $("#score2").html("");
-                //console.log(P1SCORE);
-                rps(1,true);
+                
+                rps(2,false);
             }, 2000 ); 
         }
         else if(p1win == false){
@@ -632,7 +664,7 @@ function response(data){
             PCSCORE++;
             $("#score").html("");
             $("#score2").html("");
-            //console.log(PCSCORE);
+            
             rps(2,false);
         }, 2000 );
         }
@@ -656,7 +688,7 @@ function response(data){
                 $(tie).hide();
                 $("#score").html("");
                 $("#score2").html("");
-                rps(1,true);
+                rps(2,false);
             }, 2000 );
         }
     }
